@@ -7,8 +7,8 @@ public class MainFrame extends JFrame implements Runnable {
 
     public MainFrame(String display) {
         super(display);
-        int frameWidth = 800;
-        int frameHeight = 500;
+        int frameWidth = 1000;
+        int frameHeight = 600;
         p = new DrawPanel();
         this.add(p);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
