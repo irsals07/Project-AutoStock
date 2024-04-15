@@ -15,6 +15,12 @@ public class Car {
     private BufferedImage image;
     private Rectangle carBox;
     private boolean highlight;
+    private int engine;
+    private int weight;
+    private int aero;
+    private int grip;
+    private int speed;
+    private int time;
 
     public Car(String num){
         this.topSpeed = topSpeed;

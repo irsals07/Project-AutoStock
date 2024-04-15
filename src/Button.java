@@ -13,6 +13,9 @@ public class Button {
     private BufferedImage image;
     private int x;
     private int y;
+    private Rectangle cardBox;
+
+
 
     public Button(String name, String b, int x, int y) {
         this.imageFileName = b;
@@ -21,6 +24,35 @@ public class Button {
         this.image = readImage();
         this.buttonName = name;
         this.visible = true;
+        this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
+    }
+    public void setRectangleLocation(int x, int y) {
+        cardBox.setLocation(x, y);
+    }
+
+
+    public String getButtonName() {
+        return buttonName;
+    }
+
+    public Rectangle getButton() {
+        return button;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public String getImageFileName() {
+        return imageFileName;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public BufferedImage getImage() {
@@ -41,7 +73,8 @@ public class Button {
     public void draw(Graphics g)
     {
         if (visible){
-            g.drawImage(image, x,y, image.getWidth(), image.getHeight(), null);
+            g.drawRect(getX(), getY(), image.getWidth(), image.getHeight());
+            g.drawImage(image, getX(), getY(), image.getWidth(), image.getHeight(), null);
 
         }
 }
