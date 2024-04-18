@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 
 public class Car {
     private int topSpeed;
-    private int accelaration;
     private String num;
     private String imageFileName;
     private String backImageFileName;
@@ -15,16 +14,16 @@ public class Car {
     private BufferedImage image;
     private Rectangle carBox;
     private boolean highlight;
+    private int acceleration;
     private int engine;
-    private int weight;
     private int aero;
     private int grip;
-    private int speed;
-    private int time;
+    private int shiftTime;
+    private int overall;
 
     public Car(String num){
         this.topSpeed = topSpeed;
-        this.accelaration = accelaration;
+        this.acceleration = acceleration;
         this.imageFileName = "images/car_" + num +".png";
         this.show = true;
         this.image = readImage();
