@@ -80,6 +80,9 @@ public class Button {
 }
 
     public boolean contains(Point clicked) {
-        return true;
+        if(clicked.x > getX() && clicked.x < getX()+ getImage().getWidth() && clicked.y > getY() && clicked.y < getY()+getImage().getHeight()){
+            return true;
+        }
+        return false;
     }
 }
