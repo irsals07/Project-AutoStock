@@ -14,8 +14,8 @@ public class Button {
     private int x;
     private int y;
     private Rectangle cardBox;
-
-
+    private double width;
+    private double height;
 
     public Button(String name, String b, int x, int y) {
         this.imageFileName = b;
@@ -25,6 +25,8 @@ public class Button {
         this.buttonName = name;
         this.visible = true;
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
+        this.height = image.getHeight();
+        this.width = image.getWidth();
     }
     public void setRectangleLocation(int x, int y) {
         cardBox.setLocation(x, y);
@@ -41,6 +43,9 @@ public class Button {
 
     public boolean isVisible() {
         return visible;
+    }
+    public void setVisible(boolean b){
+        visible = b;
     }
 
     public String getImageFileName() {
@@ -73,16 +78,19 @@ public class Button {
     public void draw(Graphics g)
     {
         if (visible){
-            g.drawRect(getX(), getY(), image.getWidth(), image.getHeight());
-            g.drawImage(image, getX(), getY(), image.getWidth(), image.getHeight(), null);
+            g.drawImage(image, getX(), getY(), (int)width, (int)height, null);
 
         }
 }
 
     public boolean contains(Point clicked) {
-        if(clicked.x > getX() && clicked.x < getX()+ getImage().getWidth() && clicked.y > getY() && clicked.y < getY()+getImage().getHeight()){
+        if(clicked.x > getX() && clicked.x < getX()+ width && clicked.y > getY() && clicked.y < getY()+height){
             return true;
         }
         return false;
+    }
+    public void scale(double s){
+        width = image.getWidth()*s;
+        height =image.getHeight()*s;
     }
 }
