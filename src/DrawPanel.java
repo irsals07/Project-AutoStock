@@ -156,6 +156,9 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 100, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Acceleration: " + finalAcceleration, 700, 130);
+
+            //setSpeed
+            selectedCar.setAcceleration(finalAcceleration);
         }
         if(show2){
             g.drawRect(700, 160, 200, 40);
@@ -163,6 +166,9 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 160, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Speed: " + finalSpeed, 700, 190);
+
+            //setSpeed
+            selectedCar.setTopSpeed(finalSpeed);
         }
         if(show3){
             g.drawRect(700, 220, 200, 40);
@@ -170,6 +176,9 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 220, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Engine: " + finalEngine, 700, 250);
+
+            //set Engine
+            selectedCar.setEngine(engine);
         }
         if(show4){
             g.drawRect(700, 280, 200, 40);
@@ -177,6 +186,9 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 280, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Aerodynamics: " + finalAero, 700, 310);
+
+            //set aero
+            selectedCar.setTopSpeed(finalAero);
         }
         if(show5){
             g.drawRect(700, 340, 200, 40);
@@ -184,8 +196,53 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 340, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Overall: " + finalOverall, 700, 370);
+
+            //setSpeed
+            selectedCar.setOverall(finalOverall);
         }
 
+
+        // Shift time deciding
+            // Overall: 0-10 ---> 12s
+            // Overall: 11-20 ---> 11s
+            // Overall: 21-30 ---> 11s
+            // Overall: 31-40 ---> 10s
+            // Overall: 41-50 ---> 9s
+            // Overall: 51-60 ---> 8s
+            // Overall: 61-70 ---> 7s
+            // Overall: 71-80 ---> 6s
+            // Overall: 81-90 ---> 5s
+            // Overall: 91-100 ---> 4s
+        if(overall > 0 && overall < 10){
+            selectedCar.setShiftTime(12);
+        }
+        else if(overall > 11 && overall < 20){
+            selectedCar.setShiftTime(11);
+        }
+        else if(overall > 21 && overall < 30){
+            selectedCar.setShiftTime(11);
+        }
+        else if(overall > 31 && overall < 40){
+            selectedCar.setShiftTime(10);
+        }
+        else if(overall > 41 && overall < 50){
+            selectedCar.setShiftTime(9);
+        }
+        else if(overall > 51 && overall < 60){
+            selectedCar.setShiftTime(8);
+        }
+        else if(overall > 61 && overall < 70){
+            selectedCar.setShiftTime(7);
+        }
+        else if(overall > 71 && overall < 80){
+            selectedCar.setShiftTime(6);
+        }
+        else if(overall > 81 && overall < 90){
+            selectedCar.setShiftTime(5);
+        }
+        else if(overall > 91 && overall < 100){
+            selectedCar.setShiftTime(4);
+        }
 
     }
 

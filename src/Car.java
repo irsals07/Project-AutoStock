@@ -17,7 +17,6 @@ public class Car {
     private int acceleration;
     private int engine;
     private int aero;
-    private int grip;
     private int shiftTime;
     private int overall;
 
@@ -60,6 +59,30 @@ public class Car {
             System.out.println(e);
             return null;
         }
+    }
+
+    public void setAcceleration(int acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public void setEngine(int engine) {
+        this.engine = engine;
+    }
+
+    public void setAero(int aero) {
+        this.aero = aero;
+    }
+
+    public void setShiftTime(int shiftTime) {
+        this.shiftTime = shiftTime;
+    }
+
+    public void setOverall(int overall) {
+        this.overall = overall;
+    }
+
+    public void setTopSpeed(int topSpeed) {
+        this.topSpeed = topSpeed;
     }
 
     public static ArrayList<Car> buildGarage(){
