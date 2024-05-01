@@ -9,7 +9,7 @@ public class Car {
     private int topSpeed;
     private String num;
     private String imageFileName;
-    private String backImageFileName;
+
     private boolean show;
     private BufferedImage image;
     private Rectangle carBox;
@@ -32,12 +32,6 @@ public class Car {
     public String getImageFileName() {
         return imageFileName;
     }
-    public void flipHighlight() {
-        highlight = !highlight;
-    }
-    public boolean getHighlight() {
-        return highlight;
-    }
     public void setRectangleLocation(int x, int y) {
         carBox.setLocation(x, y);
     }
@@ -46,13 +40,11 @@ public class Car {
     }
     public BufferedImage readImage() {
         try {
-            BufferedImage image;
+            BufferedImage image = null;
             if (show) {
                 image = ImageIO.read(new File(imageFileName));
             }
-            else {
-                image = ImageIO.read(new File(backImageFileName));
-            }
+            
             return image;
         }
         catch (IOException e) {
@@ -83,6 +75,47 @@ public class Car {
 
     public void setTopSpeed(int topSpeed) {
         this.topSpeed = topSpeed;
+    }
+
+
+    public int getTopSpeed() {
+        return topSpeed;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public boolean isShow() {
+        return show;
+    }
+
+    public Rectangle getCarBox() {
+        return carBox;
+    }
+
+    public boolean isHighlight() {
+        return highlight;
+    }
+
+    public int getAcceleration() {
+        return acceleration;
+    }
+
+    public int getEngine() {
+        return engine;
+    }
+
+    public int getAero() {
+        return aero;
+    }
+
+    public int getShiftTime() {
+        return shiftTime;
+    }
+
+    public int getOverall() {
+        return overall;
     }
 
     public static ArrayList<Car> buildGarage(){

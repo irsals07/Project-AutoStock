@@ -16,6 +16,7 @@ class DrawPanel extends JPanel implements MouseListener {
     private Button next;
     private Button back;
     private Button select;
+    private Button play;
     private int currentCar = 0;
     private Car selectedCar;
 
@@ -50,6 +51,7 @@ class DrawPanel extends JPanel implements MouseListener {
         next = new Button("next", "buttons/right.png", 800, 250);
         back = new Button("left", "buttons/left.png", 100, 250);
         select = new Button("select", "buttons/select.png", 450, 450);
+        play = new Button("play", "buttons/button1.png", 700, 380);
 
         stop1 = new Button("stop1", "buttons/stop.png", 550, 100);
         stop1.scale(0.8);
@@ -67,7 +69,7 @@ class DrawPanel extends JPanel implements MouseListener {
         finalAero = (int)(Math.random()*100);
         finalEngine = (int)(Math.random()*100);
         finalSpeed = (int)(Math.random()*100);
-        finalOverall = (finalAcceleration+finalAero+finalSpeed+finalEngine)/5;
+        finalOverall = (finalAcceleration+finalAero+finalSpeed+finalEngine)/4;
         show1 = false;
         show2 = false;
         show3 = false;
@@ -85,6 +87,9 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         else if(gameState == 3){
             statsScreen(g);
+        }
+        else if(gameState == 4){
+            raceScreen(g);
         }
     }
     protected void menuScreen(Graphics g){
@@ -196,23 +201,25 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 340, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Overall: " + finalOverall, 700, 370);
+            play.draw(g);
 
             //setSpeed
             selectedCar.setOverall(finalOverall);
+
         }
 
 
         // Shift time deciding
             // Overall: 0-10 ---> 12s
             // Overall: 11-20 ---> 11s
-            // Overall: 21-30 ---> 11s
-            // Overall: 31-40 ---> 10s
-            // Overall: 41-50 ---> 9s
-            // Overall: 51-60 ---> 8s
-            // Overall: 61-70 ---> 7s
-            // Overall: 71-80 ---> 6s
-            // Overall: 81-90 ---> 5s
-            // Overall: 91-100 ---> 4s
+            // Overall: 21-30 ---> 10s
+            // Overall: 31-40 ---> 9s
+            // Overall: 41-50 ---> 8s
+            // Overall: 51-60 ---> 7s
+            // Overall: 61-70 ---> 6s
+            // Overall: 71-80 ---> 5s
+            // Overall: 81-90 ---> 4s
+            // Overall: 91-100 ---> 3s
         if(overall > 0 && overall < 10){
             selectedCar.setShiftTime(12);
         }
@@ -220,31 +227,45 @@ class DrawPanel extends JPanel implements MouseListener {
             selectedCar.setShiftTime(11);
         }
         else if(overall > 21 && overall < 30){
-            selectedCar.setShiftTime(11);
-        }
-        else if(overall > 31 && overall < 40){
             selectedCar.setShiftTime(10);
         }
-        else if(overall > 41 && overall < 50){
+        else if(overall > 31 && overall < 40){
             selectedCar.setShiftTime(9);
         }
-        else if(overall > 51 && overall < 60){
+        else if(overall > 41 && overall < 50){
             selectedCar.setShiftTime(8);
         }
-        else if(overall > 61 && overall < 70){
+        else if(overall > 51 && overall < 60){
             selectedCar.setShiftTime(7);
         }
-        else if(overall > 71 && overall < 80){
+        else if(overall > 61 && overall < 70){
             selectedCar.setShiftTime(6);
         }
-        else if(overall > 81 && overall < 90){
+        else if(overall > 71 && overall < 80){
             selectedCar.setShiftTime(5);
         }
-        else if(overall > 91 && overall < 100){
+        else if(overall > 81 && overall < 90){
             selectedCar.setShiftTime(4);
         }
+        else if(overall > 91 && overall < 100){
+            selectedCar.setShiftTime(3);
+        }
+
+        if(gameState!=3){
+            removeAll();
+        }
+    }
+    protected void raceScreen(Graphics g){
+        super.paintComponent(g);
+        int x = 0;
+        int y = 0;
+        Background bg = new Background("game_images/grass.png");
+        Background track = new Background("game_images/track.jpg");
+        g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
+        g.drawImage(track.getImage(), x,150, track.getImage().getWidth(), track.getImage().getHeight(), null);
 
     }
+
 
     public void mousePressed(MouseEvent e) {
 
@@ -287,7 +308,9 @@ class DrawPanel extends JPanel implements MouseListener {
             }
             if(stop5.contains(clicked)){
                 show5 = true;
-
+            }
+            if(play.contains(clicked)){
+                gameState = 4;
             }
 
 
