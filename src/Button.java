@@ -16,6 +16,7 @@ public class Button {
     private Rectangle cardBox;
     private double width;
     private double height;
+    private boolean clickable;
 
     public Button(String name, String b, int x, int y) {
         this.imageFileName = b;
@@ -27,9 +28,14 @@ public class Button {
         this.cardBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.height = image.getHeight();
         this.width = image.getWidth();
+        this.clickable = clickable;
     }
     public void setRectangleLocation(int x, int y) {
         cardBox.setLocation(x, y);
+    }
+
+    public void setClickable(boolean b){
+        clickable = b;
     }
 
 
@@ -84,8 +90,10 @@ public class Button {
 }
 
     public boolean contains(Point clicked) {
-        if(clicked.x > getX() && clicked.x < getX()+ width && clicked.y > getY() && clicked.y < getY()+height){
-            return true;
+        if(clickable){
+            if(clicked.x > getX() && clicked.x < getX()+ width && clicked.y > getY() && clicked.y < getY()+height){
+                return true;
+            }
         }
         return false;
     }

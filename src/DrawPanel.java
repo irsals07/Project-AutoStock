@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
@@ -38,6 +39,10 @@ class DrawPanel extends JPanel implements MouseListener {
     private boolean show4;
     private boolean show5;
 
+    private Background track_start;
+    private Background track_center;
+    private Background track_end;
+
 
 
 
@@ -51,7 +56,7 @@ class DrawPanel extends JPanel implements MouseListener {
         next = new Button("next", "buttons/right.png", 800, 250);
         back = new Button("left", "buttons/left.png", 100, 250);
         select = new Button("select", "buttons/select.png", 450, 450);
-        play = new Button("play", "buttons/button1.png", 700, 380);
+        play = new Button("play", "buttons/button1.png", 700, 420);
 
         stop1 = new Button("stop1", "buttons/stop.png", 550, 100);
         stop1.scale(0.8);
@@ -75,18 +80,36 @@ class DrawPanel extends JPanel implements MouseListener {
         show3 = false;
         show4 = false;
         show5 = false;
+
+        track_start = new Background("game_images/track-beginning.jpg", 0, 150);
+        track_center = new Background("game_images/track-center.jpg",0,150);
+        track_end = new Background("game_images/track-end.jpg",0, 150);
+
     }
 
 
     protected void paintComponent(Graphics g) {
         if(gameState == 1){
             menuScreen(g);
+            b.setClickable(true);
         }
         else if(gameState==2){
             garageScreen(g);
+            b.setClickable(false);
+            select.setClickable(true);
+            next.setClickable(true);
+            back.setClickable(true);
         }
         else if(gameState == 3){
             statsScreen(g);
+            select.setClickable(false);
+            next.setClickable(false);
+            back.setClickable(false);
+            stop1.setClickable(true);
+            stop2.setClickable(true);
+            stop3.setClickable(true);
+            stop4.setClickable(true);
+            play.setClickable(true);
         }
         else if(gameState == 4){
             raceScreen(g);
@@ -251,6 +274,11 @@ class DrawPanel extends JPanel implements MouseListener {
             selectedCar.setShiftTime(3);
         }
 
+        if(show1==true &&show2==true &&show3==true &&show4==true){
+            stop5.setVisible(true);
+            stop5.setClickable(true);
+        }
+
         if(gameState!=3){
             removeAll();
         }
@@ -260,9 +288,8 @@ class DrawPanel extends JPanel implements MouseListener {
         int x = 0;
         int y = 0;
         Background bg = new Background("game_images/grass.png");
-        Background track = new Background("game_images/track.jpg");
-        g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
-        g.drawImage(track.getImage(), x,150, track.getImage().getWidth(), track.getImage().getHeight(), null);
+        track_start.draw(g);
+//        g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
     }
 
@@ -304,7 +331,6 @@ class DrawPanel extends JPanel implements MouseListener {
             }
             if(stop4.contains(clicked)){
                 show4 = true;
-                stop5.setVisible(true);
             }
             if(stop5.contains(clicked)){
                 show5 = true;
@@ -312,17 +338,15 @@ class DrawPanel extends JPanel implements MouseListener {
             if(play.contains(clicked)){
                 gameState = 4;
             }
-
-
-
         }
 
 
+
+
     }
-
-
     public void mouseReleased(MouseEvent e) { }
     public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) { }
     public void mouseClicked(MouseEvent e) { }
+
 }
