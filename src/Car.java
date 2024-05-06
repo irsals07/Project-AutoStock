@@ -1,9 +1,9 @@
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.Rectangle;
 
 public class Car {
     private int topSpeed;
@@ -19,6 +19,8 @@ public class Car {
     private int aero;
     private int shiftTime;
     private int overall;
+    private int x;
+    private int y;
 
     public Car(String num){
         this.topSpeed = topSpeed;
@@ -51,6 +53,22 @@ public class Car {
             System.out.println(e);
             return null;
         }
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public void setAcceleration(int acceleration) {
@@ -116,6 +134,14 @@ public class Car {
 
     public int getOverall() {
         return overall;
+    }
+
+
+
+    public void draw(Graphics g)
+    {
+        g.drawImage(image, getX(), getY(), (int)image.getWidth(), (int)image.getHeight(), null);
+
     }
 
     public static ArrayList<Car> buildGarage(){

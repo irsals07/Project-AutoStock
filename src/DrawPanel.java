@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 class DrawPanel extends JPanel implements MouseListener {
 
+    private KeyHandler keyHandler;
     private ArrayList<Car> garage;
     private Rectangle button;
     private Button mainButton;
@@ -57,7 +58,7 @@ class DrawPanel extends JPanel implements MouseListener {
         back = new Button("left", "buttons/left.png", 100, 250);
         select = new Button("select", "buttons/select.png", 450, 450);
         play = new Button("play", "buttons/button1.png", 700, 420);
-
+        keyHandler = new KeyHandler();
         stop1 = new Button("stop1", "buttons/stop.png", 550, 100);
         stop1.scale(0.8);
         stop2 = new Button("stop2", "buttons/stop.png", 550, 160);
@@ -114,6 +115,7 @@ class DrawPanel extends JPanel implements MouseListener {
         else if(gameState == 4){
             raceScreen(g);
         }
+        this.addKeyListener(keyHandler);
     }
     protected void menuScreen(Graphics g){
         super.paintComponent(g);
@@ -287,10 +289,13 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
+        if (keyHandler.getLeft()) {
+            selectedCar.setX(selectedCar.getX() + 1);
+        }
         Background bg = new Background("game_images/grass.png");
-        track_start.draw(g);
+//        track_start.draw(g);
 //        g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
-
+        selectedCar.draw(g);
     }
 
 
@@ -339,10 +344,6 @@ class DrawPanel extends JPanel implements MouseListener {
                 gameState = 4;
             }
         }
-
-
-
-
     }
     public void mouseReleased(MouseEvent e) { }
     public void mouseEntered(MouseEvent e) { }
