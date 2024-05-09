@@ -21,15 +21,19 @@ public class Car {
     private int overall;
     private int x;
     private int y;
+    private double width;
+    private double height;
 
     public Car(String num){
         this.topSpeed = topSpeed;
         this.acceleration = acceleration;
-        this.imageFileName = "images/car_" + num +".png";
+        this.imageFileName = "images/car_" + num +".jpg";
         this.show = true;
         this.image = readImage();
         this.carBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
+        this.width = image.getWidth();
+        this.height = image.getHeight();
     }
     public String getImageFileName() {
         return imageFileName;
@@ -140,7 +144,7 @@ public class Car {
 
     public void draw(Graphics g)
     {
-        g.drawImage(image, getX(), getY(), (int)image.getWidth(), (int)image.getHeight(), null);
+        g.drawImage(image, getX(), getY(), (int)width, (int)height, null);
 
     }
 
@@ -152,6 +156,11 @@ public class Car {
             garage.add(c);
         }
     return garage;
+    }
+
+    public void scale(double s){
+        width = image.getWidth()*s;
+        height =image.getHeight()*s;
     }
 
 

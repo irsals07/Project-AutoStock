@@ -53,10 +53,10 @@ class DrawPanel extends JPanel implements MouseListener {
         this.addMouseListener(this);
         garage = Car.buildGarage();
         gameState = 1;
-        b = new Button("PLAY", "buttons/button1.png", 450, 380);
+        b = new Button("PLAY", "buttons/button1.png", 420, 380);
         next = new Button("next", "buttons/right.png", 800, 250);
         back = new Button("left", "buttons/left.png", 100, 250);
-        select = new Button("select", "buttons/select.png", 450, 450);
+        select = new Button("select", "buttons/select.png", 750, 450);
         play = new Button("play", "buttons/button1.png", 700, 420);
         keyHandler = new KeyHandler();
         stop1 = new Button("stop1", "buttons/stop.png", 550, 100);
@@ -133,7 +133,7 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-        Background bg = new Background("images/bg2.png");
+        Background bg = new Background("images/bg1.png");
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         //Display Buttons
@@ -141,7 +141,7 @@ class DrawPanel extends JPanel implements MouseListener {
         back.draw(g);
         select.draw(g);
         Car c = garage.get(currentCar);
-        g.drawImage(c.getImage(), 400, 250, null);
+        g.drawImage(c.getImage(), 300, 350, null);
         if(gameState!=2){
             removeAll();
         }
