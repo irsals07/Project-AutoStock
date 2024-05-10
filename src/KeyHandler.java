@@ -2,34 +2,42 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
-    private boolean left = false;
+
+    private boolean go;
 
 
+
+    /**
+     * Handle the key typed event from the text field.saw
+     *
+
+    /** Handle the key-pressed event from the text field. */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
-    /**
-     * Handle the key typed event from the text field.
-     *
-
-    /** Handle the key-pressed event from the text field. */
+    @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        if (code == KeyEvent.VK_A){
-            left = true;
-            System.out.println("hello");
+
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            go = true;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Left key pressed");
         }
 
     }
 
-    /** Handle the key-released event from the text field. */
+    @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            System.out.println("Right key Released");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Left key Released");
+        }
     }
 
-    public boolean getLeft() {
-        return left;
-    }
+
 }
