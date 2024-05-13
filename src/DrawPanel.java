@@ -3,6 +3,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 
@@ -299,7 +300,9 @@ class DrawPanel extends JPanel implements MouseListener {
 
         d.draw(g);
         p.draw(g);
+        if(keyHandler.go){
 
+        }
 
 
     }
