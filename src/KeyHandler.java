@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 
-    private boolean go;
+    public boolean go;
 
 
 
@@ -23,19 +23,13 @@ public class KeyHandler implements KeyListener{
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             go = true;
         }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("Left key pressed");
-        }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            System.out.println("Right key Released");
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            System.out.println("Left key Released");
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            go = false;
         }
     }
 
