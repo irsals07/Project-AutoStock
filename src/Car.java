@@ -9,9 +9,11 @@ public class Car {
     private int topSpeed;
     private String num;
     private String imageFileName;
+    private String topImageName;
 
     private boolean show;
     private BufferedImage image;
+    private BufferedImage topImage;
     private Rectangle carBox;
     private boolean highlight;
     private int acceleration;
@@ -27,9 +29,11 @@ public class Car {
     public Car(String num){
         this.topSpeed = topSpeed;
         this.acceleration = acceleration;
-        this.imageFileName = "images/car_" + num +".jpg";
+        this.imageFileName = "images/car_" + num +".png";
+        this.topImageName = "cars/top_car" + num + ".png";
         this.show = true;
         this.image = readImage();
+        this.topImage = readTopImage();
         this.carBox = new Rectangle(-100, -100, image.getWidth(), image.getHeight());
         this.highlight = false;
         this.width = image.getWidth();
@@ -52,6 +56,20 @@ public class Car {
             }
             
             return image;
+        }
+        catch (IOException e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+    public BufferedImage readTopImage() {
+        try {
+            BufferedImage topImage = null;
+            if (show) {
+                topImage = ImageIO.read(new File(topImageName));
+            }
+
+            return topImage;
         }
         catch (IOException e) {
             System.out.println(e);
@@ -145,7 +163,10 @@ public class Car {
     public void draw(Graphics g)
     {
         g.drawImage(image, getX(), getY(), (int)width, (int)height, null);
+    }
 
+    public void drawTopView(Graphics g){
+        g.drawImage(topImage, getX(), getY(), (int)width, (int)height, null);
     }
 
     public static ArrayList<Car> buildGarage(){

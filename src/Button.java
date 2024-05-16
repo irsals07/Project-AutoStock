@@ -87,7 +87,7 @@ public class Button {
             g.drawImage(image, getX(), getY(), (int)width, (int)height, null);
 
         }
-}
+    }
 
     public boolean contains(Point clicked) {
         if(clickable){

@@ -10,8 +10,8 @@ public class Background {
     private String bg;
     private String imageFileName;
     private String backImageFileName;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     private BufferedImage image;
     private boolean show;
@@ -56,7 +56,7 @@ public class Background {
 
     public void draw(Graphics g)
     {
-            g.drawImage(image, getX(), getY(), (int)image.getWidth(), (int)image.getHeight(), null);
+        g.drawImage(image, getX(), getY(), (int)image.getWidth(), (int)image.getHeight(), null);
 
     }
 

@@ -21,7 +21,7 @@ class DrawPanel extends JPanel implements MouseListener {
     private Button select;
     private Button play;
     private int currentCar = 0;
-    private Car selectedCar;
+    public Car selectedCar;
 
     private Button stop1;
     private Button stop2;
@@ -41,9 +41,7 @@ class DrawPanel extends JPanel implements MouseListener {
     private boolean show4;
     private boolean show5;
 
-    private Background track_start;
-    private Background track_center;
-    private Background track_end;
+    private Background track;
 
 
 
@@ -84,9 +82,7 @@ class DrawPanel extends JPanel implements MouseListener {
         show4 = false;
         show5 = false;
 
-        track_start = new Background("game_images/track-beginning.jpg", 0, 150);
-        track_center = new Background("game_images/track-center.jpg",0,150);
-        track_end = new Background("game_images/track-end.jpg",0, 150);
+        track = new Background("game_images/track.jpg");
         this.setFocusable(true);
 
     }
@@ -231,6 +227,7 @@ class DrawPanel extends JPanel implements MouseListener {
             g.fillRect(700, 340, 200, 40);
             g.setColor(Color.black);
             g.drawString(" Overall: " + finalOverall, 700, 370);
+            play.setClickable(true);
             play.draw(g);
 
             //setSpeed
@@ -294,16 +291,8 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-
-        Dial d = new Dial("game_images/dial.png", 200, 300, getHeight(), getWidth());
-        Dial p = new Dial("game_images/pin.png", 300, 420, getWidth(), getHeight());
-
-        d.draw(g);
-        p.draw(g);
-        if(keyHandler.go){
-
-        }
-
+        track.setX(150);
+        track.setY(-1450);
 
     }
 

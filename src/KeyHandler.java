@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener{
 
-    public boolean go;
+    public static boolean go;
 
 
 
@@ -22,6 +22,7 @@ public class KeyHandler implements KeyListener{
 
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             go = true;
+            System.out.println(go);
         }
 
     }
