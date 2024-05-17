@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 
 class DrawPanel extends JPanel implements MouseListener {
-
-    private KeyHandler keyHandler = new KeyHandler();;
+    int count = 0;    private KeyHandler keyHandler = new KeyHandler();;
     private ArrayList<Car> garage;
     private Rectangle button;
     private Button mainButton;
@@ -291,8 +290,22 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-        track.setX(150);
-        track.setY(-1450);
+        selectedCar.drawTopView(g);
+
+
+
+        if(keyHandler.go == true){
+            track.setTrackY(track.trackY+10);
+            track.drawTrack(g);
+        }
+        if(keyHandler.go == false){
+            track.drawTrack(g);
+        }
+        selectedCar.setTopWidth(245);
+        selectedCar.setTopHeight(349.3);
+        selectedCar.drawTopView(g);
+        selectedCar.setY(200);
+        selectedCar.setX(230);
 
     }
 

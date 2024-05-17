@@ -25,6 +25,8 @@ public class Car {
     private int y;
     private double width;
     private double height;
+    private double topWidth;
+    private double topHeight;
 
     public Car(String num){
         this.topSpeed = topSpeed;
@@ -38,6 +40,8 @@ public class Car {
         this.highlight = false;
         this.width = image.getWidth();
         this.height = image.getHeight();
+        this.topWidth = topImage.getWidth();
+        this.topHeight = topImage.getHeight();
     }
     public String getImageFileName() {
         return imageFileName;
@@ -166,7 +170,7 @@ public class Car {
     }
 
     public void drawTopView(Graphics g){
-        g.drawImage(topImage, getX(), getY(), (int)width, (int)height, null);
+        g.drawImage(topImage, getX(), getY(), (int)topWidth, (int)topHeight, null);
     }
 
     public static ArrayList<Car> buildGarage(){
@@ -183,6 +187,24 @@ public class Car {
         width = image.getWidth()*s;
         height =image.getHeight()*s;
     }
+    public void topScale(double s){
+        topWidth = topImage.getWidth()*s;
+        topHeight = topImage.getHeight()*s;
+    }
 
+    public void setTopWidth(double topWidth) {
+        this.topWidth = topWidth;
+    }
 
+    public void setTopHeight(double topHeight) {
+        this.topHeight = topHeight;
+    }
+
+    public double getTopWidth() {
+        return topWidth;
+    }
+
+    public double getTopHeight() {
+        return topHeight;
+    }
 }

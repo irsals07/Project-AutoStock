@@ -22,7 +22,6 @@ public class KeyHandler implements KeyListener{
 
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             go = true;
-            System.out.println(go);
         }
 
     }

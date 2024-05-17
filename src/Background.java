@@ -12,6 +12,8 @@ public class Background {
     private String backImageFileName;
     public int x;
     public int y;
+    public int trackX = 150;
+    public int trackY = -3700;
 
     private BufferedImage image;
     private boolean show;
@@ -54,12 +56,33 @@ public class Background {
         return y;
     }
 
+    public int getTrackX() {
+        return trackX;
+    }
+
+    public void setTrackX(int trackX) {
+        this.trackX = trackX;
+    }
+
+    public int getTrackY() {
+        return trackY;
+    }
+
+    public void setTrackY(int trackY) {
+        this.trackY = trackY;
+    }
+
     public void draw(Graphics g)
     {
         g.drawImage(image, getX(), getY(), (int)image.getWidth(), (int)image.getHeight(), null);
 
     }
+    public void drawTrack(Graphics g)
+    {
 
+        g.drawImage(image, trackX, trackY, (int)image.getWidth(), (int)image.getHeight(), null);
+
+    }
     public void setX(int x) {
         this.x = x;
     }
