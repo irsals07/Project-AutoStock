@@ -13,7 +13,7 @@ public class Background {
     public int x;
     public int y;
     public int trackX = 150;
-    public int trackY = -3700;
+    public int trackY = -9400;
 
     private BufferedImage image;
     private boolean show;
@@ -79,7 +79,6 @@ public class Background {
     }
     public void drawTrack(Graphics g)
     {
-
         g.drawImage(image, trackX, trackY, (int)image.getWidth(), (int)image.getHeight(), null);
 
     }

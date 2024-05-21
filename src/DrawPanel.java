@@ -20,7 +20,12 @@ class DrawPanel extends JPanel implements MouseListener {
     private Button select;
     private Button play;
     private int currentCar = 0;
-    public Car selectedCar;
+    private Car selectedCar;
+    private Car opponentCar;
+
+    private Rectangle miniPlayer;
+    private Rectangle miniOpponent;
+    private Rectangle miniTrack;
 
     private Button stop1;
     private Button stop2;
@@ -41,6 +46,9 @@ class DrawPanel extends JPanel implements MouseListener {
     private boolean show5;
 
     private Background track;
+
+    private int miniY =450;
+    private int miniY2 = 450;
 
 
 
@@ -82,7 +90,10 @@ class DrawPanel extends JPanel implements MouseListener {
         show5 = false;
 
         track = new Background("game_images/track.jpg");
+
         this.setFocusable(true);
+
+        opponentCar = garage.get((int)(Math.random()*9));
 
     }
 
@@ -288,15 +299,12 @@ class DrawPanel extends JPanel implements MouseListener {
     }
     protected void raceScreen(Graphics g){
         super.paintComponent(g);
-        int x = 0;
-        int y = 0;
-        selectedCar.drawTopView(g);
-
-
 
         if(keyHandler.go == true){
             track.setTrackY(track.trackY+10);
             track.drawTrack(g);
+            miniY--;
+            miniY2--;
         }
         if(keyHandler.go == false){
             track.drawTrack(g);
@@ -306,6 +314,28 @@ class DrawPanel extends JPanel implements MouseListener {
         selectedCar.drawTopView(g);
         selectedCar.setY(200);
         selectedCar.setX(230);
+        opponentCar.setTopWidth(245);
+        opponentCar.setTopHeight(349.3);
+        opponentCar.drawTopView(g);
+        opponentCar.setY(200);
+        opponentCar.setX(530);
+        if(keyHandler.shift == true){
+            selectedCar.setY(selectedCar.getY() + 5);
+            selectedCar.drawTopView(g);
+            keyHandler.shift = false;
+        }
+
+
+
+        g.setColor(Color.gray);
+        g.drawRect(900, 100, 50, 350);
+        g.fillRect(900,100, 50, 350);
+        g.setColor(Color.red);
+        g.drawRect(900, miniY, 25, 25);
+        g.fillRect(900, miniY, 25, 25);
+        g.setColor(Color.green);
+        g.drawRect(925,  miniY2, 25, 25);
+        g.fillRect(925, miniY2, 25, 25);
 
     }
 
