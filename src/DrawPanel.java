@@ -319,11 +319,7 @@ class DrawPanel extends JPanel implements MouseListener {
         opponentCar.drawTopView(g);
         opponentCar.setY(200);
         opponentCar.setX(530);
-        if(keyHandler.shift == true){
-            selectedCar.setY(selectedCar.getY() + 5);
-            selectedCar.drawTopView(g);
-            keyHandler.shift = false;
-        }
+
 
 
 
