@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 
 class DrawPanel extends JPanel implements MouseListener {
-    int count = 0;    private KeyHandler keyHandler = new KeyHandler();;
+    int count = 0;
+    private KeyHandler keyHandler = new KeyHandler();;
     private ArrayList<Car> garage;
+    private ArrayList<Pin> pins;
     private Rectangle button;
     private Button mainButton;
     private int gameState;
@@ -93,7 +95,9 @@ class DrawPanel extends JPanel implements MouseListener {
 
         this.setFocusable(true);
 
-        opponentCar = garage.get((int)(Math.random()*9));
+        opponentCar = garage.get((int)(Math.random()*8));
+
+
 
     }
 
