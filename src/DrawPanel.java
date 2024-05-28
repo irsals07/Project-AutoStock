@@ -52,6 +52,11 @@ class DrawPanel extends JPanel implements MouseListener {
     private int miniY =450;
     private int miniY2 = 450;
 
+    private int pin = 0;
+    private int frames = 0;
+    private int selectedCarX = 190;
+    private int selectedCarY = 200;
+
 
 
 
@@ -60,6 +65,7 @@ class DrawPanel extends JPanel implements MouseListener {
         button = new Rectangle(200, 380, 160, 26);
         this.addMouseListener(this);
         garage = Car.buildGarage();
+        pins = Pin.showPin();
         gameState = 1;
         b = new Button("PLAY", "buttons/button1.png", 420, 380);
         next = new Button("next", "buttons/right.png", 800, 250);
@@ -304,11 +310,25 @@ class DrawPanel extends JPanel implements MouseListener {
     protected void raceScreen(Graphics g){
         super.paintComponent(g);
 
+        for(int i = 0; i<pins.size(); i++){
+            pins.get(i).scale(.8);
+        }
+
+
         if(keyHandler.go == true){
             track.setTrackY(track.trackY+10);
             track.drawTrack(g);
             miniY--;
             miniY2--;
+
+            frames++;
+            System.out.println(pin);
+            if(frames%10 == 0){
+                pin++;
+            }
+            if(frames % 200 == 0){
+                pin = 0;
+            }
         }
         if(keyHandler.go == false){
             track.drawTrack(g);
@@ -316,26 +336,30 @@ class DrawPanel extends JPanel implements MouseListener {
         selectedCar.setTopWidth(245);
         selectedCar.setTopHeight(349.3);
         selectedCar.drawTopView(g);
-        selectedCar.setY(200);
-        selectedCar.setX(230);
+        selectedCar.setY(selectedCarY);
+        selectedCar.setX(selectedCarX);
         opponentCar.setTopWidth(245);
         opponentCar.setTopHeight(349.3);
         opponentCar.drawTopView(g);
         opponentCar.setY(200);
         opponentCar.setX(530);
 
+        pins.get(pin).draw(g);
 
 
 
         g.setColor(Color.gray);
-        g.drawRect(900, 100, 50, 350);
-        g.fillRect(900,100, 50, 350);
+        g.drawRect(930, 100, 50, 350);
+        g.fillRect(930,100, 50, 350);
         g.setColor(Color.red);
-        g.drawRect(900, miniY, 25, 25);
-        g.fillRect(900, miniY, 25, 25);
+        g.drawRect(930, miniY, 25, 25);
+        g.fillRect(930, miniY, 25, 25);
         g.setColor(Color.green);
-        g.drawRect(925,  miniY2, 25, 25);
-        g.fillRect(925, miniY2, 25, 25);
+        g.drawRect(955,  miniY2, 25, 25);
+        g.fillRect(955, miniY2, 25, 25);
+
+
+
 
     }
 

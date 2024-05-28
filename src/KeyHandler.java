@@ -16,9 +16,8 @@ public class KeyHandler implements KeyListener{
     /** Handle the key-pressed event from the text field. */
     @Override
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyChar() == ' ') {
-            shift = true;
-        }
+
+
     }
 
     @Override
@@ -26,6 +25,10 @@ public class KeyHandler implements KeyListener{
         //System.out.println(e.getKeyCode() + " " + KeyEvent.VK_W);
         if (e.getKeyCode() == KeyEvent.VK_W) {
             go = true;
+            //System.out.println("hello");
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            shift = true;
             //System.out.println("hello");
         }
 
@@ -36,6 +39,9 @@ public class KeyHandler implements KeyListener{
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_W) {
             go = false;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            shift = false;
         }
     }
 

@@ -12,8 +12,8 @@ public class Background {
     private String backImageFileName;
     public int x;
     public int y;
-    public int trackX = 150;
-    public int trackY = -9400;
+    public int trackX = 0;
+    public int trackY = -3100;
 
     private BufferedImage image;
     private boolean show;
