@@ -61,6 +61,7 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
 
+
     public DrawPanel() {
         button = new Rectangle(200, 380, 160, 26);
         this.addMouseListener(this);
@@ -313,7 +314,15 @@ class DrawPanel extends JPanel implements MouseListener {
         for(int i = 0; i<pins.size(); i++){
             pins.get(i).scale(.8);
         }
+        System.out.println(frames);
 
+        //SHIFTING PROCESS
+        if(keyHandler.shift == true && ((frames > 100 && frames<150)||(frames>200 && frames<250))){
+            selectedCarY = selectedCarY - 1;
+        }
+        if(((frames > 150 && frames<200)||(frames>250 && frames<300))){
+            selectedCarY = selectedCarY +1;
+        }
 
         if(keyHandler.go == true){
             track.setTrackY(track.trackY+10);
@@ -322,7 +331,7 @@ class DrawPanel extends JPanel implements MouseListener {
             miniY2--;
 
             frames++;
-            System.out.println(pin);
+            //System.out.println(pin);
             if(frames%10 == 0){
                 pin++;
             }
@@ -335,14 +344,15 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         selectedCar.setTopWidth(245);
         selectedCar.setTopHeight(349.3);
-        selectedCar.drawTopView(g);
         selectedCar.setY(selectedCarY);
         selectedCar.setX(selectedCarX);
+        selectedCar.drawTopView(g);
         opponentCar.setTopWidth(245);
         opponentCar.setTopHeight(349.3);
-        opponentCar.drawTopView(g);
         opponentCar.setY(200);
         opponentCar.setX(530);
+        opponentCar.drawTopView(g);
+
 
         pins.get(pin).draw(g);
 

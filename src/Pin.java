@@ -58,6 +58,22 @@ public class Pin {
         }
     }
 
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth2() {
+        return width2;
+    }
+
+    public double getHeight2() {
+        return height2;
+    }
+
     public BufferedImage readDial() {
         try {
             BufferedImage dial = null;
@@ -99,6 +115,11 @@ public class Pin {
     public void scale(double s){
         width = image.getWidth()*s;
         height =image.getHeight()*s;
+
+    }
+    public void dialScale(double s){
+        width2 = dial.getWidth()*s;
+        height2 = dial.getHeight()*s;
     }
 
 }
