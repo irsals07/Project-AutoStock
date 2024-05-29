@@ -314,14 +314,18 @@ class DrawPanel extends JPanel implements MouseListener {
         for(int i = 0; i<pins.size(); i++){
             pins.get(i).scale(.8);
         }
-        System.out.println(frames);
+        g.drawString("Frames: " + frames, 1500, 700);
 
         //SHIFTING PROCESS
         if(keyHandler.shift == true && ((frames > 100 && frames<150)||(frames>200 && frames<250))){
-            selectedCarY = selectedCarY - 1;
+            selectedCarY = selectedCarY - 3;
         }
-        if(((frames > 150 && frames<200)||(frames>250 && frames<300))){
-            selectedCarY = selectedCarY +1;
+        else if(keyHandler.shift == true && !((frames > 100 && frames<150)||(frames>200 && frames<250))){
+            selectedCarY = selectedCarY + 3;
+        }
+
+        if(((frames > 150 && frames<175)||(frames>275 && frames<300))){
+            selectedCarY = selectedCarY +2;
         }
 
         if(keyHandler.go == true){
@@ -330,13 +334,17 @@ class DrawPanel extends JPanel implements MouseListener {
             miniY--;
             miniY2--;
 
+
             frames++;
             //System.out.println(pin);
             if(frames%10 == 0){
                 pin++;
+                Pin.drawX -= 7;
             }
             if(frames % 200 == 0){
                 pin = 0;
+                Pin.drawX = 1490;
+                Pin.drawY = 170;
             }
         }
         if(keyHandler.go == false){
@@ -355,6 +363,7 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
         pins.get(pin).draw(g);
+        //System.out.println("X: " + pins.get(pin).getX() + "Y: " + pins.get(pin).getY());
 
 
 

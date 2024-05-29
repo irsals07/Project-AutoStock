@@ -3,7 +3,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,8 @@ import java.awt.*;
 
 public class Pin {
 
+    public static int drawX = 1490;
+    public static int drawY = 170;
     private double width;
     private double height;
     private double width2;
@@ -100,7 +102,7 @@ public class Pin {
     public void draw(Graphics g)
     {
         g.drawImage(dial, 1300, getY(), (int)width2, (int)height2, null);
-        g.drawImage(image, 1350, getY(), (int)width, (int)height, null);
+        g.drawImage(image, drawX, drawY, (int)width, (int)height, null);
     }
     public static ArrayList<Pin> showPin(){
         ArrayList<Pin> showPin = new ArrayList<Pin>();
@@ -121,5 +123,8 @@ public class Pin {
         width2 = dial.getWidth()*s;
         height2 = dial.getHeight()*s;
     }
+
+
+
 
 }
