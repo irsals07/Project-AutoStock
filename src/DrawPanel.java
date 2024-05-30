@@ -314,18 +314,25 @@ class DrawPanel extends JPanel implements MouseListener {
         for(int i = 0; i<pins.size(); i++){
             pins.get(i).scale(.8);
         }
+        g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("Frames: " + frames, 1500, 700);
+        g.drawString("Your Overall: " + finalOverall, 1500, 750);
+        g.drawString("Opponent Overall: 65", 1500, 800);
 
         //SHIFTING PROCESS
-        if(keyHandler.shift == true && ((frames > 100 && frames<150)||(frames>200 && frames<250))){
-            selectedCarY = selectedCarY - 3;
+        if(keyHandler.shift == true && shift(finalOverall)){
+            selectedCarY = selectedCarY - 5;
+            miniY++;
+            pin=1;
         }
-        else if(keyHandler.shift == true && !((frames > 100 && frames<150)||(frames>200 && frames<250))){
+        else if(keyHandler.shift == true && !shift(finalOverall)){
             selectedCarY = selectedCarY + 3;
+            miniY--;
         }
-
-        if(((frames > 150 && frames<175)||(frames>275 && frames<300))){
+//opponent shift
+        if(shift(70)){
             selectedCarY = selectedCarY +2;
+            miniY2++;
         }
 
         if(keyHandler.go == true){
@@ -339,7 +346,8 @@ class DrawPanel extends JPanel implements MouseListener {
             //System.out.println(pin);
             if(frames%10 == 0){
                 pin++;
-                Pin.drawX -= 7;
+                Pin.drawX -= 8;
+                Pin.drawY -= 3;
             }
             if(frames % 200 == 0){
                 pin = 0;
@@ -349,6 +357,7 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         if(keyHandler.go == false){
             track.drawTrack(g);
+            selectedCarY = selectedCarY + 3;
         }
         selectedCar.setTopWidth(245);
         selectedCar.setTopHeight(349.3);
@@ -380,6 +389,24 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
 
+    }
+
+    public boolean shift(int finalOverall){
+        if(finalOverall <= 20){
+            return ((frames > 250 && frames<300));
+        }
+        else if(finalOverall > 20 && finalOverall <= 50){
+            return (frames>200 && frames < 250) || (frames>350 && frames< 400);
+        }
+        else if(finalOverall > 51 && finalOverall <= 70){
+            return (frames>150 && frames < 200) || (frames>250 && frames<300) || (frames>350 && frames<400);
+        }
+        else if(finalOverall > 70 && finalOverall < 90){
+            return (frames>50 && frames<100) || (frames>150 && frames<200) ||(frames>250 && frames<300) ||(frames>350 && frames<400);
+        }
+        else{
+            return true;
+        }
     }
 
 
