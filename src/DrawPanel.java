@@ -56,7 +56,14 @@ class DrawPanel extends JPanel implements MouseListener {
     private int frames = 0;
     private int selectedCarX = 190;
     private int selectedCarY = 200;
+    private int opponentOverall = (int)(Math.random()*100)+1;
 
+    private long startTime = 0;
+    private long stopTime = 0;
+    private boolean running = false;
+
+    private int car1X = 0;
+    private int car2X = 0;
 
 
 
@@ -134,6 +141,9 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         else if(gameState == 4){
             raceScreen(g);
+        }
+        else if(gameState == 5){
+            winnerScreen(g);
         }
         this.addKeyListener(keyHandler);
     }
@@ -302,6 +312,13 @@ class DrawPanel extends JPanel implements MouseListener {
         if(show1==true &&show2==true &&show3==true &&show4==true){
             stop5.setVisible(true);
             stop5.setClickable(true);
+
+
+        }
+        if(show5==true){
+            g.drawString(" Your Overall is : " + finalOverall + " So  you should " +
+                    "\n shift every" +
+                    "\n " + shiftTimes(finalOverall), 100, 530);
         }
 
         if(gameState!=3){
@@ -316,8 +333,20 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("Frames: " + frames, 1500, 700);
+        g.drawRect(1690, 900, 30, 30);
+        if(shift(finalOverall)){
+            g.drawRect(1690, 900, 90, 30);
+            g.setColor(Color.green);
+            g.fillRect(1690, 900, 90, 30);
+        }
+        else{
+            g.drawRect(1690, 900, 190, 30);
+            g.setColor(Color.red);
+            g.fillRect(1690, 900, 190, 30);
+        }
+
         g.drawString("Your Overall: " + finalOverall, 1500, 750);
-        g.drawString("Opponent Overall: 65", 1500, 800);
+        g.drawString("Opponent Overall: " + opponentOverall, 1500, 800);
 
         //SHIFTING PROCESS
         if(keyHandler.shift == true && shift(finalOverall)){
@@ -330,7 +359,7 @@ class DrawPanel extends JPanel implements MouseListener {
             miniY--;
         }
 //opponent shift
-        if(shift(70)){
+        if(shift(opponentOverall)){
             selectedCarY = selectedCarY +2;
             miniY2++;
         }
@@ -343,6 +372,9 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
             frames++;
+            if(frames==310){
+                gameState = 5;
+            }
             //System.out.println(pin);
             if(frames%10 == 0){
                 pin++;
@@ -357,7 +389,7 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         if(keyHandler.go == false){
             track.drawTrack(g);
-            selectedCarY = selectedCarY + 3;
+
         }
         selectedCar.setTopWidth(245);
         selectedCar.setTopHeight(349.3);
@@ -386,9 +418,23 @@ class DrawPanel extends JPanel implements MouseListener {
         g.drawRect(955,  miniY2, 25, 25);
         g.fillRect(955, miniY2, 25, 25);
 
+        if(gameState!=4){
+            removeAll();
+        }
+    }
+    protected void winnerScreen(Graphics g){
+        super.paintComponent(g);
+        int x = 0;
+        int y = 0;
+        Background bg = new Background("game_images/winner.jpg");
+        g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
-
-
+        //Display Buttons
+        Car c = garage.get(currentCar);
+        g.drawImage(c.getImage(), 300, 350, null);
+        if(gameState!=5){
+            removeAll();
+        }
     }
 
     public boolean shift(int finalOverall){
@@ -406,6 +452,23 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         else{
             return true;
+        }
+    }
+    public String shiftTimes(int finalOverall){
+        if(finalOverall <= 20){
+            return "250 - 300 frames";
+        }
+        else if(finalOverall > 20 && finalOverall <= 50){
+            return "200-250 frames";
+        }
+        else if(finalOverall > 51 && finalOverall <= 70){
+            return "150-200 frames or 250-300 frames";
+        }
+        else if(finalOverall > 70 && finalOverall < 90){
+            return "50-100, 150-200, or 250-300 frames";
+        }
+        else{
+            return "whenever";
         }
     }
 
