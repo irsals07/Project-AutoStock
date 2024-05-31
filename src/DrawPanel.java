@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 class DrawPanel extends JPanel implements MouseListener {
     int count = 0;
+    public Car winner;
     private KeyHandler keyHandler = new KeyHandler();;
     private ArrayList<Car> garage;
     private ArrayList<Pin> pins;
@@ -374,6 +375,12 @@ class DrawPanel extends JPanel implements MouseListener {
             frames++;
             if(frames==310){
                 gameState = 5;
+                if(selectedCar.getY() > opponentCar.getY()){
+                    winner = selectedCar;
+                }
+                else{
+                    winner = opponentCar;
+                }
             }
             //System.out.println(pin);
             if(frames%10 == 0){
@@ -430,8 +437,8 @@ class DrawPanel extends JPanel implements MouseListener {
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         //Display Buttons
-        Car c = garage.get(currentCar);
-        g.drawImage(c.getImage(), 300, 350, null);
+
+        g.drawImage(winner.getImage(), 300, 380, null);
         if(gameState!=5){
             removeAll();
         }
