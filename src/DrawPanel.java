@@ -4,6 +4,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -59,13 +62,12 @@ class DrawPanel extends JPanel implements MouseListener {
     private int selectedCarY = 200;
     private int opponentOverall = (int)(Math.random()*100)+1;
 
-    private long startTime = 0;
-    private long stopTime = 0;
-    private boolean running = false;
-
     private int car1X = 0;
     private int car2X = 0;
 
+    private long startTime = 0;
+    private long endTime = 0;
+    private double sec;
 
 
 
@@ -144,7 +146,11 @@ class DrawPanel extends JPanel implements MouseListener {
             raceScreen(g);
         }
         else if(gameState == 5){
-            winnerScreen(g);
+            try {
+                winnerScreen(g);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         this.addKeyListener(keyHandler);
     }
@@ -329,6 +335,7 @@ class DrawPanel extends JPanel implements MouseListener {
     protected void raceScreen(Graphics g){
         super.paintComponent(g);
 
+
         for(int i = 0; i<pins.size(); i++){
             pins.get(i).scale(.8);
         }
@@ -370,6 +377,12 @@ class DrawPanel extends JPanel implements MouseListener {
             track.drawTrack(g);
             miniY--;
             miniY2--;
+            if(frames ==1){
+                startTime = System.currentTimeMillis();
+            }
+            if(frames == 300){
+                endTime = System.currentTimeMillis();
+            }
 
 
             frames++;
@@ -429,7 +442,7 @@ class DrawPanel extends JPanel implements MouseListener {
             removeAll();
         }
     }
-    protected void winnerScreen(Graphics g){
+    protected void winnerScreen(Graphics g) throws IOException {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
@@ -437,6 +450,12 @@ class DrawPanel extends JPanel implements MouseListener {
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         //Display Buttons
+        sec = (endTime - startTime) / 1000F;
+        BufferedWriter writer = new BufferedWriter(new FileWriter("src/leaderboard"));
+        writer.write("\n"+"Time: " + sec + "|");
+
+        writer.close();
+
 
         g.drawImage(winner.getImage(), 300, 380, null);
         if(gameState!=5){
