@@ -15,6 +15,8 @@ public class Background {
     public int trackX = 0;
     public int trackY = -3100;
 
+    public int length;
+
     private BufferedImage image;
     private boolean show;
     public Background(String bg){

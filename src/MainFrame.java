@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import java.io.IOException;
 import java.security.Key;
 
 public class MainFrame extends JFrame implements Runnable {
@@ -8,7 +9,7 @@ public class MainFrame extends JFrame implements Runnable {
     private Thread windowThread;
     KeyHandler kh = new KeyHandler();
 
-    public MainFrame(String display) {
+    public MainFrame(String display) throws IOException {
         super(display);
         int frameWidth = 1500;
         int frameHeight = 600;

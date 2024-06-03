@@ -4,10 +4,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 class DrawPanel extends JPanel implements MouseListener {
@@ -356,11 +358,12 @@ class DrawPanel extends JPanel implements MouseListener {
         g.drawString("Your Overall: " + finalOverall, 1500, 750);
         g.drawString("Opponent Overall: " + opponentOverall, 1500, 800);
 
+
         //SHIFTING PROCESS
         if(keyHandler.shift == true && shift(finalOverall)){
             selectedCarY = selectedCarY - 5;
             miniY++;
-            pin=1;
+            pin=0;
         }
         else if(keyHandler.shift == true && !shift(finalOverall)){
             selectedCarY = selectedCarY + 3;
@@ -386,9 +389,30 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
             frames++;
-            if(frames==310){
+            if(frames==360){
+                sec = (endTime - startTime) / 1000F;
+                //time adjustments
+                if((selectedCarY - opponentCar.getY()) > 1000){
+                    sec+=1;
+                }
+                else if((selectedCarY - opponentCar.getY()) > 700){
+                    sec+=.7;
+                }
+                else if((selectedCarY - opponentCar.getY()) > 500){
+                    sec+=.5;
+                }
+                else if((selectedCarY - opponentCar.getY()) > 700){
+                    sec+=.2;
+                }
+
+                String t = "\nTime: " + sec + " seconds";
+                try {
+                    Files.write(Paths.get("src/leaderboard"), t.getBytes(), StandardOpenOption.APPEND);
+                }catch (IOException e) {
+                    //exception handling left as an exercise for the reader
+                }
                 gameState = 5;
-                if(selectedCar.getY() > opponentCar.getY()){
+                if(selectedCar.getY() < opponentCar.getY()){
                     winner = selectedCar;
                 }
                 else{
@@ -423,6 +447,7 @@ class DrawPanel extends JPanel implements MouseListener {
         opponentCar.drawTopView(g);
 
 
+
         pins.get(pin).draw(g);
         //System.out.println("X: " + pins.get(pin).getX() + "Y: " + pins.get(pin).getY());
 
@@ -449,12 +474,33 @@ class DrawPanel extends JPanel implements MouseListener {
         Background bg = new Background("game_images/winner.jpg");
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
-        //Display Buttons
-        sec = (endTime - startTime) / 1000F;
-        BufferedWriter writer = new BufferedWriter(new FileWriter("src/leaderboard"));
-        writer.write("\n"+"Time: " + sec + "|");
+        if(winner == selectedCar){
+            g.setFont(new Font("Courier New", Font.BOLD, 30));
+            g.drawString("You Win!", 1000, 75);
+        }
+        else {
+            g.setFont(new Font("Courier New", Font.BOLD, 30));
+            g.drawString("You Lost!", 1000, 75);
+        }
 
-        writer.close();
+        //Display leaderboard
+        int ly = 140;
+        g.setFont(new Font("Courier New", Font.BOLD, 30));
+        g.drawString("LeaderBoard", 1500, 120);
+        g.drawString("____________", 1500, 125);
+        File f = null;
+        try {
+            f = new File("src/leaderboard");
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String currentLine = s.nextLine();
+                g.drawString(currentLine, 1300, ly+=35);
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+
 
 
         g.drawImage(winner.getImage(), 300, 380, null);
