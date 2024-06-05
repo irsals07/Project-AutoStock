@@ -62,7 +62,7 @@ class DrawPanel extends JPanel implements MouseListener {
     private int frames = 0;
     private int selectedCarX = 190;
     private int selectedCarY = 200;
-    private int opponentOverall = (int)(Math.random()*100)+1;
+    private int opponentOverall = (int)(Math.random()*91)+1;
 
     private int car1X = 0;
     private int car2X = 0;
@@ -324,11 +324,6 @@ class DrawPanel extends JPanel implements MouseListener {
 
 
         }
-        if(show5==true){
-            g.drawString(" Your Overall is : " + finalOverall + " So  you should " +
-                    "\n shift every" +
-                    "\n " + shiftTimes(finalOverall), 100, 530);
-        }
 
         if(gameState!=3){
             removeAll();
@@ -343,16 +338,15 @@ class DrawPanel extends JPanel implements MouseListener {
         }
         g.setFont(new Font("Courier New", Font.BOLD, 30));
         g.drawString("Frames: " + frames, 1500, 700);
-        g.drawRect(1690, 900, 30, 30);
         if(shift(finalOverall)){
-            g.drawRect(1690, 900, 90, 30);
+            g.drawRect(1600, 820, 250, 30);
             g.setColor(Color.green);
-            g.fillRect(1690, 900, 90, 30);
+            g.fillRect(1600, 820, 250, 30);
         }
         else{
-            g.drawRect(1690, 900, 190, 30);
+            g.drawRect(1600, 850, 200, 30);
             g.setColor(Color.red);
-            g.fillRect(1690, 900, 190, 30);
+            g.fillRect(1600, 850, 200, 30);
         }
 
         g.drawString("Your Overall: " + finalOverall, 1500, 750);
@@ -392,32 +386,37 @@ class DrawPanel extends JPanel implements MouseListener {
             if(frames==360){
                 sec = (endTime - startTime) / 1000F;
                 //time adjustments
-                if((selectedCarY - opponentCar.getY()) > 1000){
-                    sec+=1;
-                }
-                else if((selectedCarY - opponentCar.getY()) > 700){
-                    sec+=.7;
-                }
-                else if((selectedCarY - opponentCar.getY()) > 500){
-                    sec+=.5;
-                }
-                else if((selectedCarY - opponentCar.getY()) > 700){
-                    sec+=.2;
-                }
+//                if((selectedCarY - opponentCar.getY()) > 1000){
+//                    sec+=1;
+//                }
+//                else if((selectedCarY - opponentCar.getY()) > 700){
+//                    sec+=.7;
+//                }
+//                else if((selectedCarY - opponentCar.getY()) > 500){
+//                    sec+=.5;
+//                }
+//                else if((selectedCarY - opponentCar.getY()) > 700){
+//                    sec+=.2;
+//                }
 
-                String t = "\nTime: " + sec + " seconds";
+                String t = "\nTime: " + sec + " seconds | ";
+                if(selectedCar.getY() < opponentCar.getY()){
+                    winner = selectedCar;
+                    t+="Player";
+                }
+                else{
+                    winner = opponentCar;
+                    t+="Opponent";
+                }
                 try {
                     Files.write(Paths.get("src/leaderboard"), t.getBytes(), StandardOpenOption.APPEND);
                 }catch (IOException e) {
                     //exception handling left as an exercise for the reader
                 }
                 gameState = 5;
-                if(selectedCar.getY() < opponentCar.getY()){
-                    winner = selectedCar;
-                }
-                else{
-                    winner = opponentCar;
-                }
+
+
+
             }
             //System.out.println(pin);
             if(frames%10 == 0){
@@ -471,22 +470,23 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
+        g.drawRect(1250, 130, 600, 700);
         Background bg = new Background("game_images/winner.jpg");
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         if(winner == selectedCar){
             g.setFont(new Font("Courier New", Font.BOLD, 30));
-            g.drawString("You Win!", 1000, 75);
+            g.drawString("You Win!", 1000, 85);
         }
         else {
             g.setFont(new Font("Courier New", Font.BOLD, 30));
-            g.drawString("You Lost!", 1000, 75);
+            g.drawString("You Lost!", 1000, 85);
         }
 
         //Display leaderboard
         int ly = 140;
-        g.setFont(new Font("Courier New", Font.BOLD, 30));
-        g.drawString("LeaderBoard", 1500, 120);
+        g.setFont(new Font("Courier New", Font.BOLD, 20));
+        g.drawString("LeaderBoard", 1450, 120);
         g.drawString("____________", 1500, 125);
         File f = null;
         try {

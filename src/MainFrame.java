@@ -11,7 +11,7 @@ public class MainFrame extends JFrame implements Runnable {
 
     public MainFrame(String display) throws IOException {
         super(display);
-        int frameWidth = 1500;
+        int frameWidth = 1000;
         int frameHeight = 600;
         p = new DrawPanel();
         this.add(p);
