@@ -276,47 +276,6 @@ class DrawPanel extends JPanel implements MouseListener {
         }
 
 
-        // Shift time deciding
-            // Overall: 0-10 ---> 12s
-            // Overall: 11-20 ---> 11s
-            // Overall: 21-30 ---> 10s
-            // Overall: 31-40 ---> 9s
-            // Overall: 41-50 ---> 8s
-            // Overall: 51-60 ---> 7s
-            // Overall: 61-70 ---> 6s
-            // Overall: 71-80 ---> 5s
-            // Overall: 81-90 ---> 4s
-            // Overall: 91-100 ---> 3s
-        if(overall > 0 && overall < 10){
-            selectedCar.setShiftTime(12);
-        }
-        else if(overall > 11 && overall < 20){
-            selectedCar.setShiftTime(11);
-        }
-        else if(overall > 21 && overall < 30){
-            selectedCar.setShiftTime(10);
-        }
-        else if(overall > 31 && overall < 40){
-            selectedCar.setShiftTime(9);
-        }
-        else if(overall > 41 && overall < 50){
-            selectedCar.setShiftTime(8);
-        }
-        else if(overall > 51 && overall < 60){
-            selectedCar.setShiftTime(7);
-        }
-        else if(overall > 61 && overall < 70){
-            selectedCar.setShiftTime(6);
-        }
-        else if(overall > 71 && overall < 80){
-            selectedCar.setShiftTime(5);
-        }
-        else if(overall > 81 && overall < 90){
-            selectedCar.setShiftTime(4);
-        }
-        else if(overall > 91 && overall < 100){
-            selectedCar.setShiftTime(3);
-        }
 
         if(show1==true &&show2==true &&show3==true &&show4==true){
             stop5.setVisible(true);
