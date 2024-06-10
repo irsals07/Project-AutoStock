@@ -80,22 +80,22 @@ class DrawPanel extends JPanel implements MouseListener {
         garage = Car.buildGarage();
         pins = Pin.showPin();
         gameState = 1;
-        b = new Button("PLAY", "buttons/button1.png", 420, 380);
-        next = new Button("next", "buttons/right.png", 800, 250);
-        back = new Button("left", "buttons/left.png", 100, 250);
-        select = new Button("select", "buttons/select.png", 750, 450);
-        play = new Button("play", "buttons/button1.png", 700, 420);
+        b = new Button("PLAY", "image_directory/buttons/button1.png", 420, 380);
+        next = new Button("next", "image_directory/buttons/right.png", 800, 250);
+        back = new Button("left", "image_directory/buttons/left.png", 100, 250);
+        select = new Button("select", "image_directory/buttons/select.png", 750, 450);
+        play = new Button("play", "image_directory/buttons/button1.png", 700, 420);
 //       keyHandler = new KeyHandler();
         addKeyListener(this.keyHandler);
-        stop1 = new Button("stop1", "buttons/stop.png", 550, 100);
+        stop1 = new Button("stop1", "image_directory/buttons/stop.png", 550, 100);
         stop1.scale(0.8);
-        stop2 = new Button("stop2", "buttons/stop.png", 550, 160);
+        stop2 = new Button("stop2", "image_directory/buttons/stop.png", 550, 160);
         stop2.scale(0.8);
-        stop3 = new Button("stop3", "buttons/stop.png", 550, 220);
+        stop3 = new Button("stop3", "image_directory/buttons/stop.png", 550, 220);
         stop3.scale(0.8);
-        stop4 = new Button("stop4", "buttons/stop.png", 550, 280);
+        stop4 = new Button("stop4", "image_directory/buttons/stop.png", 550, 280);
         stop4.scale(0.8);
-        stop5 = new Button("stop5", "buttons/stop.png", 550, 340);
+        stop5 = new Button("stop5", "image_directory/buttons/stop.png", 550, 340);
         stop5.scale(0.8);
         stop5.setVisible(false);
 
@@ -110,7 +110,7 @@ class DrawPanel extends JPanel implements MouseListener {
         show4 = false;
         show5 = false;
 
-        track = new Background("game_images/track.jpg");
+        track = new Background("image_directory/game_images/track.jpg");
 
         this.setFocusable(true);
 
@@ -160,7 +160,7 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-        Background bg = new Background("images/bg1.png");
+        Background bg = new Background("image_directory/images/bg1.png");
         g.drawImage(bg.getImage(), x,y, (int)bg.getImage().getWidth(), bg.getImage().getHeight(), null);
         b.draw(g);
         b.setRectangleLocation(b.getX(), b.getY());
@@ -174,7 +174,7 @@ class DrawPanel extends JPanel implements MouseListener {
         super.paintComponent(g);
         int x = 0;
         int y = 0;
-        Background bg = new Background("images/bg1.png");
+        Background bg = new Background("image_directory/images/bg1.png");
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         //Display Buttons
@@ -471,7 +471,7 @@ class DrawPanel extends JPanel implements MouseListener {
         int x = 0;
         int y = 0;
         g.drawRect(1250, 130, 600, 700);
-        Background bg = new Background("game_images/winner.jpg");
+        Background bg = new Background("image_directory/game_images/winner.jpg");
         g.drawImage(bg.getImage(), x,y, bg.getImage().getWidth(), bg.getImage().getHeight(), null);
 
         if(winner == selectedCar){

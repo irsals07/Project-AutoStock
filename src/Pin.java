@@ -30,8 +30,8 @@ public class Pin {
     private int x;
     private int y;
     public Pin(String num){
-        this.imageFileName = "pin_movement/" + num +".png";
-        this.dialName = "game_images/dial.png";
+        this.imageFileName = "image_directory/pin_movement/" + num +".png";
+        this.dialName = "image_directory/game_images/dial.png";
 
         this.show = true;
         this.image = readImage();

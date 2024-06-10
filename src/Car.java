@@ -31,8 +31,8 @@ public class Car {
     public Car(String num){
         this.topSpeed = topSpeed;
         this.acceleration = acceleration;
-        this.imageFileName = "images/car_" + num +".png";
-        this.topImageName = "cars/top_car" + num + ".png";
+        this.imageFileName = "image_directory/images/car_" + num +".png";
+        this.topImageName = "image_directory/cars/top_car" + num + ".png";
         this.show = true;
         this.image = readImage();
         this.topImage = readTopImage();
